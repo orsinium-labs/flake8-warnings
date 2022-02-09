@@ -23,13 +23,18 @@ class WarningInfo(NamedTuple):
     message: str
     category: Type[Warning]
     argument: Optional[str] = None
+    line: int = 1
+    col: int = 0
 
     @property
     def code(self) -> int:
         return CODES.get(self.category, 1)
 
+    def evolve(self, **kwargs) -> 'WarningInfo':
+        return self._replace(**kwargs)
+
     def __str__(self) -> str:
-        return f'{self.category.__name__}: {self.message}'
+        return f'{self.line}:{self.col} [{self.category.__name__}] {self.message}'
 
 
 class Extractor:
