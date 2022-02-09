@@ -31,4 +31,4 @@ class WarningInfo(NamedTuple):
 
 class Extractor:
     def extract(self, node: astroid.NodeNG) -> Iterator[WarningInfo]:
-        yield from ()
+        raise NotImplementedError
