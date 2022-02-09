@@ -2,3 +2,4 @@ __pycache__/
 /.coverage
 /htmlcov/
 .*_cache/
+/tmp.py

@@ -1,4 +1,6 @@
 from collections import deque
+from contextlib import suppress
+from pathlib import Path
 from typing import Iterator, Tuple, Type
 from ._base import Extractor, WarningInfo
 from ._warnings import WarningsExtractor
@@ -17,6 +19,12 @@ class WarningFinder:
         self._module = module
         self._extractors = tuple(e() for e in EXTRACTORS)
 
+    @classmethod
+    def from_path(cls, path: Path) -> 'WarningFinder':
+        text = path.read_text()
+        module = astroid.parse(code=text, path=str(path))
+        return cls(module)
+
     def find(self) -> Iterator[WarningInfo]:
         yield from self._check_imports()
 
@@ -28,10 +36,12 @@ class WarningFinder:
     def _get_imported_modules(self) -> Iterator[astroid.Module]:
         for node in self._traverse(self._module):
             if isinstance(node, astroid.Import):
-                for name, _alias in node.names:
-                    yield self._module.import_module(name)
+                for name, _ in node.names:
+                    with suppress(astroid.AstroidImportError):
+                        yield self._module.import_module(name)
             if isinstance(node, astroid.ImportFrom):
-                yield self._module.import_module(node.modname)
+                with suppress(astroid.AstroidImportError):
+                    yield self._module.import_module(node.modname)
 
     @staticmethod
     def _traverse(node: astroid.NodeNG) -> Iterator[astroid.NodeNG]:

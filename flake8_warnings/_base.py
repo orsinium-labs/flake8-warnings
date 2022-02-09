@@ -28,6 +28,9 @@ class WarningInfo(NamedTuple):
     def code(self) -> int:
         return CODES.get(self.category, 1)
 
+    def __str__(self) -> str:
+        return f'{self.category.__name__}: {self.message}'
+
 
 class Extractor:
     def extract(self, node: astroid.NodeNG) -> Iterator[WarningInfo]:
