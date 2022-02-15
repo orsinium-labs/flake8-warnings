@@ -17,6 +17,7 @@ CODES: Mapping[Type[Warning], int] = MappingProxyType({
     BytesWarning: 10,
     ResourceWarning: 11,
 })
+NAMES = MappingProxyType({cat.__name__: cat for cat in CODES})
 
 
 class WarningInfo(NamedTuple):

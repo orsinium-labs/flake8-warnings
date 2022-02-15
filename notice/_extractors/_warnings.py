@@ -1,10 +1,9 @@
 from types import MappingProxyType
 from typing import Iterator, Optional, List
 import astroid
-from ._base import WarningInfo, CODES, Extractor
+from ._base import WarningInfo, NAMES, Extractor
 
 
-NAMES = MappingProxyType({cat.__name__: cat for cat in CODES})
 BRANCHING = (
     astroid.If,
     astroid.With,

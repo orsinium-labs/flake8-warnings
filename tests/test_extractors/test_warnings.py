@@ -1,4 +1,4 @@
-from notice._extractors._warnings import WarningsExtractor, NAMES
+from notice._extractors import WarningsExtractor
 from textwrap import dedent
 import astroid
 import pytest
@@ -12,10 +12,6 @@ def p(text):
 
 def e(node):
     return [(w.category, w.message) for w in WarningsExtractor().extract(node)]
-
-
-def test_names():
-    assert NAMES['UserWarning'] is UserWarning
 
 
 def test_module_deprecated():
