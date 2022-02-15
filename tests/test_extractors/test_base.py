@@ -1,4 +1,4 @@
-from notice._base import CODES
+from notice._extractors._base import CODES
 
 
 def test_codes():

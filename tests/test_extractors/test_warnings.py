@@ -1,4 +1,4 @@
-from notice._warnings import WarningsExtractor, NAMES
+from notice._extractors._warnings import WarningsExtractor, NAMES
 from textwrap import dedent
 import astroid
 import pytest

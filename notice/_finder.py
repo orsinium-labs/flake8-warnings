@@ -1,14 +1,9 @@
 from collections import deque
 from contextlib import suppress
 from pathlib import Path
-from typing import Iterator, Tuple, Type
-from ._base import Extractor, WarningInfo
-from ._warnings import WarningsExtractor
+from typing import Iterator, Tuple
+from ._extractors import Extractor, WarningInfo, EXTRACTORS
 import astroid
-
-EXTRACTORS: Tuple[Type[Extractor], ...] = (
-    WarningsExtractor,
-)
 
 
 class WarningFinder:
