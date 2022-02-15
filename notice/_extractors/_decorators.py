@@ -16,7 +16,7 @@ class DecoratorsExtractor(Extractor):
     def extract(self, node: astroid.NodeNG) -> Iterator[WarningInfo]:
         if not isinstance(node, (astroid.FunctionDef, astroid.ClassDef)):
             return
-        if node.decorators is None:
+        if not node.decorators:
             return
         assert isinstance(node.decorators, astroid.Decorators)
         dec: astroid.NodeNG

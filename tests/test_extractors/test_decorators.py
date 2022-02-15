@@ -28,7 +28,7 @@ def e(node):
         'Use the bar function instead',
     ),
     (
-        'deprecated(deprecated_in="1.0", current_version=__version__, details="Use the bar function instead")',
+        'deprecated(deprecated_in="1.0", current_version=__version__, details="Use the bar function instead")',  # noqa
         'Use the bar function instead',
     ),
     # https://github.com/mfalesni/python-deprecate
@@ -36,7 +36,7 @@ def e(node):
     ('deprecate.deprecated(message="call to depr func")', 'call to depr func'),
     # https://github.com/multi-vac/py_deprecate
     (
-        'deprecated(allowed_deprecations=[allowed_sum_caller], message="sum is no longer supported.")',
+        'deprecated(allowed_deprecations=[allowed_sum_caller], message="sum is no longer supported.")',  # noqa
         'sum is no longer supported.',
     ),
 ])

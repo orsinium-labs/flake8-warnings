@@ -33,7 +33,7 @@ dependencies = ["astroid"]
 test = ["pytest"]
 lint = [
     "flake8-length",
-    "unify",
+    "mypy",
     "isort",
 ]
 

@@ -1,4 +1,3 @@
-from types import MappingProxyType
 from typing import Iterator, Optional, List
 import astroid
 from ._base import WarningInfo, NAMES, Extractor
