@@ -1,5 +1,6 @@
 from types import MappingProxyType
 from typing import Iterator, Mapping, NamedTuple, Optional, Type
+
 import astroid
 
 

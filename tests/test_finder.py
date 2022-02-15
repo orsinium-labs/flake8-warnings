@@ -1,6 +1,8 @@
 from textwrap import dedent
+
 import astroid
 import pytest
+
 from notice._finder import WarningFinder
 
 

@@ -2,6 +2,7 @@ import ast
 import tokenize
 from pathlib import Path
 from typing import Iterator, Optional, Sequence
+
 from ._finder import WarningFinder
 
 

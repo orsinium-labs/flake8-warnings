@@ -1,4 +1,5 @@
 from typing import Tuple, Type
+
 from ._base import Extractor, WarningInfo
 from ._decorators import DecoratorsExtractor
 from ._warnings import WarningsExtractor

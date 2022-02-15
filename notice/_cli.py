@@ -1,8 +1,8 @@
-from argparse import ArgumentParser
 import sys
-from typing import List, NoReturn, TextIO
+from argparse import ArgumentParser
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, List, NoReturn, TextIO
+
 from ._finder import WarningFinder
 
 

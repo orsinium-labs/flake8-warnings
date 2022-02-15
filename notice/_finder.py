@@ -2,8 +2,10 @@ from collections import deque
 from contextlib import suppress
 from pathlib import Path
 from typing import Iterator, Tuple
-from ._extractors import Extractor, WarningInfo, EXTRACTORS
+
 import astroid
+
+from ._extractors import EXTRACTORS, Extractor, WarningInfo
 
 
 class WarningFinder:

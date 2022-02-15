@@ -1,6 +1,8 @@
 from typing import Iterator, Optional
+
 import astroid
-from ._base import WarningInfo, Extractor
+
+from ._base import Extractor, WarningInfo
 
 
 class DecoratorsExtractor(Extractor):

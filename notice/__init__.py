@@ -3,5 +3,6 @@
 
 from ._flake8_plugin import Flake8Checker
 
+
 __version__ = '0.1.0'
 __all__ = ['Flake8Checker']

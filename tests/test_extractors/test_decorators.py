@@ -1,7 +1,9 @@
-from notice._extractors import DecoratorsExtractor
 from textwrap import dedent
+
 import astroid
 import pytest
+
+from notice._extractors import DecoratorsExtractor
 
 
 def p(text):

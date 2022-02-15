@@ -1,6 +1,8 @@
-from typing import Iterator, Optional, List
+from typing import Iterator, List, Optional
+
 import astroid
-from ._base import WarningInfo, NAMES, Extractor
+
+from ._base import NAMES, Extractor, WarningInfo
 
 
 BRANCHING = (
