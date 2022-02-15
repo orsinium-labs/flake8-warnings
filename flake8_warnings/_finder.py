@@ -25,6 +25,11 @@ class WarningFinder:
         module = astroid.parse(code=text, path=str(path))
         return cls(module)
 
+    @classmethod
+    def from_text(cls, text: str) -> 'WarningFinder':
+        module = astroid.parse(code=text)
+        return cls(module)
+
     def find(self) -> Iterator[WarningInfo]:
         yield from self._check_imports()
 
