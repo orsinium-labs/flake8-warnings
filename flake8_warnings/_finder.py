@@ -30,19 +30,29 @@ class WarningFinder:
 
     def _check_imports(self) -> Iterator[WarningInfo]:
         for node in self._traverse(self._module):
-            for module in self._get_imported_modules(node):
+            for target_node in self._get_imported_nodes(node):
                 for extractor in self._extractors:
-                    for warning in extractor.extract(module):
+                    for warning in extractor.extract(target_node):
                         yield warning.evolve(line=node.lineno, col=node.col_offset)
 
-    def _get_imported_modules(self, node) -> Iterator[astroid.Module]:
+    def _get_imported_nodes(self, node) -> Iterator[astroid.NodeNG]:
         if isinstance(node, astroid.Import):
             for name, _ in node.names:
                 with suppress(astroid.AstroidImportError):
                     yield self._module.import_module(name)
-        if isinstance(node, astroid.ImportFrom):
-            with suppress(astroid.AstroidImportError):
-                yield self._module.import_module(node.modname)
+
+        if not isinstance(node, astroid.ImportFrom):
+            return
+        try:
+            module = self._module.import_module(node.modname)
+        except astroid.AstroidImportError:
+            return
+        yield module
+        for name, _ in node.names:
+            _, resolved_nodes = module.lookup(name)
+            for node in resolved_nodes:
+                if isinstance(node, (astroid.ClassDef, astroid.FunctionDef)):
+                    yield node
 
     @staticmethod
     def _traverse(node: astroid.NodeNG) -> Iterator[astroid.NodeNG]:

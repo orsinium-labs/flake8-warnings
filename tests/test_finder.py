@@ -20,7 +20,9 @@ ASTROID_WARNING = "The 'astroid.node_classes' module is deprecated and will be r
 @pytest.mark.parametrize("given, etype, emsg", [
     ("import astroid.node_classes", DeprecationWarning, ASTROID_WARNING),
     ("from astroid.node_classes import *", DeprecationWarning, ASTROID_WARNING),
-    ("from astroid.node_classes import NodeNG", DeprecationWarning, ASTROID_WARNING),
+    ("import tests.samples.warnings_module", DeprecationWarning, "mod warn"),
+    ("from tests.samples.warnings_module import fun", DeprecationWarning, "mod warn"),
+    ("from tests.samples.warnings_function import func", DeprecationWarning, "func warn"),
 ])
 def test_finder__import(given, etype, emsg):
     r = e(p(given))
