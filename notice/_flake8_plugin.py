@@ -5,7 +5,10 @@ from typing import Iterator, Optional, Sequence
 from ._finder import WarningFinder
 
 
-class Checker:
+TEMPLATE = 'NT00{code} {message}'
+
+
+class Flake8Checker:
     name = __package__
     version = '0.0.1'
 
@@ -27,6 +30,7 @@ class Checker:
 
     def run(self) -> Iterator[tuple]:
         for winfo in self._finder.find():
+            text = TEMPLATE.format(code=winfo.code, message=winfo.message)
             yield (
-                winfo.line, winfo.col, winfo.message, type(self),
+                winfo.line, winfo.col, text, type(self),
             )

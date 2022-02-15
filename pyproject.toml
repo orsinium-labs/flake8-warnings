@@ -33,14 +33,13 @@ dependencies = ["astroid"]
 test = ["pytest"]
 lint = [
     "flake8-length",
-    "wemake-python-styleguide",
     "unify",
     "isort",
 ]
 
 
 [project.entry-points."flake8.extension"]
-WS00 = "notice:Checker"
+NT00 = "notice:Flake8Checker"
 
 [project.urls]
 Source = "https://github.com/orsinium-labs/notice"
