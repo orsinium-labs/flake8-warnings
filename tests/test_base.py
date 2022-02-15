@@ -1,4 +1,4 @@
-from flake8_warnings._base import CODES
+from notice._base import CODES
 
 
 def test_codes():

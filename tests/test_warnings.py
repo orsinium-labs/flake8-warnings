@@ -1,4 +1,4 @@
-from flake8_warnings._warnings import WarningsExtractor, NAMES
+from notice._warnings import WarningsExtractor, NAMES
 from textwrap import dedent
 import astroid
 import pytest

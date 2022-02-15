@@ -3,7 +3,7 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "flake8_warnings"
+name = "notice"
 authors = [
     {name = "Gram", email = "gram@orsinium.dev"},
 ]
@@ -40,13 +40,13 @@ lint = [
 
 
 [project.entry-points."flake8.extension"]
-WS00 = "flake8_warnings:Checker"
+WS00 = "notice:Checker"
 
 [project.urls]
-Source = "https://github.com/orsinium-labs/flake8-warnings"
+Source = "https://github.com/orsinium-labs/notice"
 
 [tool.mypy]
-files = ["flake8_warnings", "tests"]
+files = ["notice", "tests"]
 python_version = 3.7
 ignore_missing_imports = true
 # follow_imports = "silent"
