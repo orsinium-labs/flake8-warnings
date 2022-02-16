@@ -35,7 +35,11 @@ class WarningFinder:
             for target_node in self._get_imported_nodes(node):
                 for extractor in self._extractors:
                     for warning in extractor.extract(target_node):
-                        yield warning.evolve(line=node.lineno, col=node.col_offset)
+                        yield warning.evolve(
+                            line=node.lineno,
+                            col=node.col_offset,
+                            node=node,
+                        )
 
     def _get_imported_nodes(self, node) -> Iterator[astroid.NodeNG]:
         if isinstance(node, astroid.Import):

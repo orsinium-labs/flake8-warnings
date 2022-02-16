@@ -25,6 +25,7 @@ class WarningInfo(NamedTuple):
     message: str
     category: Type[Warning]
     argument: Optional[str] = None
+    node: Optional[astroid.NodeNG] = None
     line: int = 1
     col: int = 0
 
