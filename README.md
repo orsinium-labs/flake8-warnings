@@ -1,4 +1,4 @@
-# flake8_warnings
+# flake8-warnings
 
 Python linter that warns you about using deprecated modules, classes, and functions. It provides a CLI as well as [flake8][flake8] and [pylint][pylint] plugins.
 
@@ -7,7 +7,7 @@ Python linter that warns you about using deprecated modules, classes, and functi
 Installation:
 
 ```bash
-python3 -m pip install flake8_warnings
+python3 -m pip install flake8-warnings
 ```
 
 Now, you can use it in one of the following ways:
