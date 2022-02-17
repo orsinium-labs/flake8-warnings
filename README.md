@@ -46,7 +46,7 @@ The tool provides a different error code for each [warning category](https://doc
 This is how they are used in different linters:
 
 + In flake8, the code prefix is `WS0`, so `DeprecationWarning` will be reported as `WS003`.
-+ In pylint, the prefix is `W99`, so `DeprecationWarning` will be reported as `DeprecationWarning`. The "message-symbol" is the warning category. So, if you want to ignore an error about `DeprecationWarning`, add `# pylint: disable=DeprecationWarning` to this line.
++ In pylint, the prefix is `W99`, so `DeprecationWarning` will be reported as `W9903`. The "message-symbol" is the warning category. So, if you want to ignore an error about `DeprecationWarning`, add `# pylint: disable=DeprecationWarning` to this line.
 + If you use CLI, the warning category will be shown you directly, without any obscure codes.
 
 In all cases, the error message is the detected warning message.
