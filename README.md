@@ -18,3 +18,16 @@ Now, you can use it in one of the following ways:
 
 [flake8]: https://flake8.pycqa.org/en/latest/
 [pylint]: https://pylint.org/
+
+## How it works
+
+It analyzes all imported modules, classes and functions and detects the following:
+
+1. [warnings.warn](https://docs.python.org/3/library/warnings.html#warnings.warn) function calls.
+1. Deprecation decorators like [deprecated](https://github.com/tantale/deprecated) or [deprecation](https://github.com/briancurtin/deprecation).
+1. Deprecation messages in docstrings.
+
+## License
+
+1. flake8-wranings is licensed under [MIT License](./LICENSE). On practice, I don't care how you're going to use it. i did the project because it is fun, not because I want to be famous or whatever.
+1. [astroid](https://github.com/PyCQA/astroid) is a direct runtime dependency of flake8-warning and it is licensed under [LGPL-2.1 License](https://github.com/PyCQA/astroid/blob/main/LICENSE). It allows commercial and private usage, distribution and whatever, don't confuse it with GPL. However, if your legal department is still nervous, just don't make flake8-warnings a production dependency (why would you?), use it only on dev and test environments.
