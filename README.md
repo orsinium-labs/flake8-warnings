@@ -27,6 +27,30 @@ It analyzes all imported modules, classes and functions and detects the followin
 1. Deprecation decorators like [deprecated](https://github.com/tantale/deprecated) or [deprecation](https://github.com/briancurtin/deprecation).
 1. Deprecation messages in docstrings.
 
+## Error codes
+
+The tool provides a different error code for each [warning category](https://docs.python.org/3/library/warnings.html#warning-categories):
+
++ 01: Warning
++ 02: UserWarning
++ 03: DeprecationWarning
++ 04: SyntaxWarning
++ 05: RuntimeWarning
++ 06: FutureWarning
++ 07: PendingDeprecationWarning
++ 08: ImportWarning
++ 09: UnicodeWarning
++ 10: BytesWarning
++ 11: ResourceWarning
+
+This is how they are used in different linters:
+
++ In flake8, the code prefix is `WS0`, so `DeprecationWarning` will be reported as `WS003`.
++ In pylint, the prefix is `W99`, so `DeprecationWarning` will be reported as `DeprecationWarning`. The "message-symbol" is the warning category. So, if you want to ignore an error about `DeprecationWarning`, add `# pylint: disable=DeprecationWarning` to this line.
++ If you use CLI, the warning category will be shown you directly, without any obscure codes.
+
+In all cases, the error message is the detected warning message.
+
 ## License
 
 1. flake8-wranings is licensed under [MIT License](./LICENSE). On practice, I don't care how you're going to use it. i did the project because it is fun, not because I want to be famous or whatever.

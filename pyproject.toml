@@ -39,7 +39,7 @@ lint = [
 
 
 [project.entry-points."flake8.extension"]
-NT0 = "flake8_warnings:Flake8Checker"
+WS0 = "flake8_warnings:Flake8Checker"
 
 [project.urls]
 Source = "https://github.com/orsinium-labs/flake8-warnings"

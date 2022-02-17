@@ -6,7 +6,7 @@ from typing import Iterator, Optional, Sequence
 from ._finder import WarningFinder
 
 
-TEMPLATE = 'NT0{code:02} {message}'
+TEMPLATE = 'WS0{code:02} {message}'
 
 
 class Flake8Checker:
