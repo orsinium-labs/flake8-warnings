@@ -1,4 +1,4 @@
-from notice._extractors._base import CODES, NAMES
+from flake8_warnings._extractors._base import CODES, NAMES
 
 
 def test_codes():

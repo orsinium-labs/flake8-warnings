@@ -23,7 +23,7 @@ class PyLintChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = 'notice'
+    name = 'flake8_warnings'
     msgs = {CODE.format(code): ('%s', cat.__name__, '') for cat, code in CODES.items()}
 
     def visit_module(self, node: astroid.Module) -> None:

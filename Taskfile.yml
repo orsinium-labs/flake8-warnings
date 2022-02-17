@@ -35,12 +35,12 @@ tasks:
       - install:test
     cmds:
       - .venvs/base/bin/flitenv test run pytest {{.CLI_ARGS}}
-  notice:run:
-    desc: "run notice"
+  flake8_warnings:run:
+    desc: "run flake8_warnings"
     deps:
       - install:lint
     cmds:
-      - .venvs/base/bin/flitenv lint run python3 -m notice {{.CLI_ARGS}}
+      - .venvs/base/bin/flitenv lint run python3 -m flake8_warnings {{.CLI_ARGS}}
   flake8:run:
     desc: "lint Python code"
     deps:

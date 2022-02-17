@@ -3,7 +3,7 @@ from textwrap import dedent
 import astroid
 import pytest
 
-from notice._extractors import WarningsExtractor
+from flake8_warnings._extractors import WarningsExtractor
 
 
 def p(text):
