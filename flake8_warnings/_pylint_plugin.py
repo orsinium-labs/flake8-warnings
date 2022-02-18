@@ -1,12 +1,17 @@
 from typing import TYPE_CHECKING
 import astroid
-from pylint.checkers import BaseChecker
-from pylint.interfaces import IAstroidChecker
 from ._finder import WarningFinder
 from ._extractors import CODES
 
 if TYPE_CHECKING:
     from pylint.lint import PyLinter
+
+try:
+    from pylint.checkers import BaseChecker
+    from pylint.interfaces import IAstroidChecker
+except ImportError:
+    BaseChecker = object
+    IAstroidChecker = object
 
 
 CODE = 'W99{:02}'
@@ -26,7 +31,7 @@ class PyLintChecker(BaseChecker):
     name = 'flake8_warnings'
     msgs = {CODE.format(code): ('%s', cat.__name__, '') for cat, code in CODES.items()}
 
-    def visit_module(self, node: astroid.Module) -> None:
+    def visit_module(self: BaseChecker, node: astroid.Module) -> None:
         finder = WarningFinder(node)
         for winfo in finder.find():
             self.add_message(
