@@ -4,6 +4,7 @@ import astroid
 
 from ._base import Extractor, WarningInfo
 
+
 MODULES = frozenset({
     # PEP 594: Removing dead batteries
     'aifc',

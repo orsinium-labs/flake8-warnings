@@ -1,7 +1,8 @@
 import pytest
 
 from flake8_warnings._extractors import WarningsExtractor
-from .helpers import p, e
+
+from .helpers import e, p
 
 
 def test_module_deprecated():

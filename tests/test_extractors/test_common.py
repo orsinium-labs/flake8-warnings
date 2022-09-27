@@ -1,6 +1,7 @@
 import pytest
 
 from flake8_warnings._finder import WarningFinder
+
 from .helpers import p
 
 

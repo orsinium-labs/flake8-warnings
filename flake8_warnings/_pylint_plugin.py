@@ -1,7 +1,10 @@
 from typing import TYPE_CHECKING
+
 import astroid
-from ._finder import WarningFinder
+
 from ._extractors import CODES
+from ._finder import WarningFinder
+
 
 if TYPE_CHECKING:
     from pylint.lint import PyLinter

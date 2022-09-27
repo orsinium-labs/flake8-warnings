@@ -1,6 +1,7 @@
 import pytest
 
 from flake8_warnings._extractors import DecoratorsExtractor
+
 from .helpers import e, p
 
 
