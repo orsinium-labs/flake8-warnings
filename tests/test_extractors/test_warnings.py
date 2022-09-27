@@ -1,23 +1,11 @@
-from textwrap import dedent
-
-import astroid
 import pytest
 
 from flake8_warnings._extractors import WarningsExtractor
-
-
-def p(text):
-    tree = astroid.parse(dedent(text))
-    print(tree.repr_tree())
-    return tree
-
-
-def e(node):
-    return [(w.category, w.message) for w in WarningsExtractor().extract(node)]
+from .helpers import p, e
 
 
 def test_module_deprecated():
-    r = e(p("""
+    r = e(WarningsExtractor, p("""
         import warnings
         from astroid.nodes.node_classes import (
             AsyncFor,
@@ -42,7 +30,7 @@ def test_module_deprecated():
     ('', UserWarning, 'warnings.warn()'),
 ])
 def test_module_deprecated__args_parsing(given, ecat, emsg):
-    r = e(p(f"""
+    r = e(WarningsExtractor, p(f"""
         import warnings
         warnings.warn({given})
     """))

@@ -26,6 +26,7 @@ It analyzes all imported modules, classes and functions and detects the followin
 1. [warnings.warn](https://docs.python.org/3/library/warnings.html#warnings.warn) function calls.
 1. Deprecation decorators like [deprecated](https://github.com/tantale/deprecated) or [deprecation](https://github.com/briancurtin/deprecation).
 1. Deprecation messages in docstrings.
+1. Stdlib modules deprecated by [PEP 594](https://peps.python.org/pep-0594/).
 
 ## Error codes
 
