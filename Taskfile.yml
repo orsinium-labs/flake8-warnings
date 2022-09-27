@@ -1,9 +1,9 @@
 # https://taskfile.dev
 
-version: '3'
+version: "3"
 
 vars:
-  PYTHON: python3.9
+  PYTHON: python3
 env:
   FLIT_ROOT_INSTALL: "1"
 

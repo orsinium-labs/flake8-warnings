@@ -1,19 +1,8 @@
-from textwrap import dedent
-
-import astroid
 import pytest
 
 from flake8_warnings._extractors import DecoratorsExtractor
 
-
-def p(text):
-    tree = astroid.parse(dedent(text))
-    print(tree.repr_tree())
-    return tree
-
-
-def e(node):
-    return [(w.category, w.message) for w in DecoratorsExtractor().extract(node)]
+from .helpers import e, p
 
 
 @pytest.mark.parametrize('given, exp', [
@@ -43,7 +32,7 @@ def e(node):
     ),
 ])
 def test_extract_deprecated(given, exp):
-    r = e(p(f"""
+    r = e(DecoratorsExtractor, p(f"""
         from deprecated import deprecated
 
         @{given}
