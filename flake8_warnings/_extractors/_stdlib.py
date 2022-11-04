@@ -9,7 +9,7 @@ MODULES = frozenset({
     # PEP 594: Removing dead batteries
     'aifc',
     'asynchat',
-    # 'asyncore',  # detected by another extractor
+    'asyncore',
     'audioop',
     'cgi',
     'cgitb',
@@ -30,9 +30,12 @@ MODULES = frozenset({
     'uu',
     'xdrlib',
 
+    # PEP 632, removed in Python 3.12
+    'distutils',
+
     # deprecated but not announced to be removed
     'optparse',
-    # 'tkinter.tix',  # detected by another extractor
+    'tkinter.tix',
     'xml.etree.cElementTree',
 })
 
@@ -42,9 +45,11 @@ class StdlibExtractor(Extractor):
     """
 
     def extract(self, node: astroid.NodeNG) -> Iterator[WarningInfo]:
-        if not isinstance(node, (astroid.Module, astroid.FunctionDef)):
+        if not isinstance(node, astroid.Module):
             return
         qname = node.qname()
+        if qname not in MODULES:
+            qname = qname.split('.')[0]
         if qname in MODULES:
             yield WarningInfo(
                 message=f'stdlib module {qname} is deprecated',
