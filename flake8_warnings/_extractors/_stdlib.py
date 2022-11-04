@@ -9,7 +9,7 @@ MODULES = frozenset({
     # PEP 594: Removing dead batteries
     'aifc',
     'asynchat',
-    # 'asyncore',  # detected by another extractor
+    'asyncore',
     'audioop',
     'cgi',
     'cgitb',
@@ -35,7 +35,7 @@ MODULES = frozenset({
 
     # deprecated but not announced to be removed
     'optparse',
-    # 'tkinter.tix',  # detected by another extractor
+    'tkinter.tix',
     'xml.etree.cElementTree',
 })
 
@@ -45,7 +45,7 @@ class StdlibExtractor(Extractor):
     """
 
     def extract(self, node: astroid.NodeNG) -> Iterator[WarningInfo]:
-        if not isinstance(node, (astroid.Module, astroid.FunctionDef)):
+        if not isinstance(node, astroid.Module):
             return
         qname = node.qname()
         if qname not in MODULES:

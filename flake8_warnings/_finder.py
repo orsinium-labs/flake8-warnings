@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 from collections import deque
 from contextlib import suppress
 from pathlib import Path
-from typing import Iterator, Tuple
+from typing import Iterator
 
 import astroid
 
@@ -10,7 +12,7 @@ from ._extractors import EXTRACTORS, Extractor, WarningInfo
 
 class WarningFinder:
     _module: astroid.Module
-    _extractors: Tuple[Extractor, ...]
+    _extractors: tuple[Extractor, ...]
 
     def __init__(self, module: astroid.Module):
         self._module = module
@@ -34,12 +36,17 @@ class WarningFinder:
         for node in self._traverse(self._module):
             for target_node in self._get_imported_nodes(node):
                 for extractor in self._extractors:
-                    for warning in extractor.extract(target_node):
+                    warnings = list(extractor.extract(target_node))
+                    for warning in warnings:
                         yield warning.evolve(
                             line=node.lineno,
                             col=node.col_offset,
                             node=node,
                         )
+                    # If one extractor found something for the node,
+                    # don't try other extractors.
+                    if warnings:
+                        break
 
     def _get_imported_nodes(self, node) -> Iterator[astroid.NodeNG]:
         if isinstance(node, astroid.Import):
