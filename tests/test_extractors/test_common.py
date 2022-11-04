@@ -30,6 +30,10 @@ from .helpers import p
     'import uu',
     'import xdrlib',
 
+    'import distutils',
+    'from distutils.core import setup',
+    'from distutils.sysconfig import get_python_inc',
+
     'import optparse',
     'import tkinter.tix',
     'import xml.etree.cElementTree',

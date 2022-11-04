@@ -67,14 +67,3 @@ class WarningFinder:
             node = todo.popleft()
             todo.extend(node.get_children())
             yield node
-
-    # @staticmethod
-    # def _infer(expr) -> Tuple[astroid.NodeNG, ...]:
-    #     if not isinstance(expr, astroid.NodeNG):
-    #         return tuple()
-    #     with suppress(astroid.InferenceError, RecursionError):
-    #         guesses = expr.infer()
-    #         if guesses is astroid.Uninferable:  # pragma: no cover
-    #             return tuple()
-    #         return tuple(g for g in guesses if repr(g) != 'Uninferable')
-    #     return tuple()

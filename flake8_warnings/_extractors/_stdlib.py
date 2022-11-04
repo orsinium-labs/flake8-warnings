@@ -30,6 +30,9 @@ MODULES = frozenset({
     'uu',
     'xdrlib',
 
+    # PEP 632, removed in Python 3.12
+    'distutils',
+
     # deprecated but not announced to be removed
     'optparse',
     # 'tkinter.tix',  # detected by another extractor
@@ -45,6 +48,8 @@ class StdlibExtractor(Extractor):
         if not isinstance(node, (astroid.Module, astroid.FunctionDef)):
             return
         qname = node.qname()
+        if qname not in MODULES:
+            qname = qname.split('.')[0]
         if qname in MODULES:
             yield WarningInfo(
                 message=f'stdlib module {qname} is deprecated',
