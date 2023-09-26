@@ -27,7 +27,7 @@ keywords = [
     "linter",
     "flakehell",
 ]
-dependencies = ["astroid"]
+dependencies = ["astroid>=2.15,<3"]
 
 [project.optional-dependencies]
 test = ["pytest"]
