@@ -8,9 +8,6 @@ from .helpers import e, p
 def test_module_deprecated():
     r = e(WarningsExtractor, p("""
         import warnings
-        from astroid.nodes.node_classes import (
-            AsyncFor,
-        )
         warnings.warn(
             "The module is deprecated and so on",
             DeprecationWarning,
