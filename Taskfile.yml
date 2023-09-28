@@ -1,73 +1,133 @@
-# https://taskfile.dev
-
+# https://taskfile.dev/
 version: "3"
 
 vars:
   PYTHON: python3
+  VENVS: .venvs
+  TEST_ENV: .venvs/test
+  LINT_ENV: .venvs/lint
+  TEST_PYTHON: "{{.TEST_ENV}}/bin/python3"
+  LINT_PYTHON: "{{.LINT_ENV}}/bin/python3"
+
 env:
   FLIT_ROOT_INSTALL: "1"
 
 tasks:
-  install:base:
+  install:flit:
     status:
-      - test -f .venvs/base/bin/flitenv
+      - which flit
     cmds:
-      - "{{.PYTHON}} -m venv .venvs/base"
-      - .venvs/base/bin/python3 -m pip install -U flitenv pip-tools
+      - python3 -m pip install flit
+  venv:test:
+    status:
+      - test -d {{.TEST_ENV}}
+    cmds:
+      - "{{.PYTHON}} -m venv {{.TEST_ENV}}"
+  venv:lint:
+    status:
+      - test -d {{.LINT_ENV}}
+    cmds:
+      - "{{.PYTHON}} -m venv {{.LINT_ENV}}"
   install:test:
     sources:
       - pyproject.toml
     deps:
-      - install:base
+      - install:flit
+      - venv:test
     cmds:
-      - .venvs/base/bin/flitenv test install
+      - >
+        flit install
+        --python {{.TEST_PYTHON}}
+        --extras=test,integrations
+        --deps=production
+        --symlink
   install:lint:
     sources:
       - pyproject.toml
     deps:
-      - install:base
+      - install:flit
+      - venv:lint
     cmds:
-      - .venvs/base/bin/flitenv lint install
+      - >
+        flit install
+        --python {{.LINT_PYTHON}}
+        --extras=lint,integrations
+        --deps=production
+        --symlink
 
-  pytest:run:
+  release:
+    desc: generate and upload a new release
+    deps:
+      - install:flit
+    cmds:
+      - which gh
+      - test {{.CLI_ARGS}}
+      - cat flake8_warnings/__init__.py | grep {{.CLI_ARGS}}
+      - rm -rf dist/
+      - flit build
+      - flit publish
+      - git tag {{.CLI_ARGS}}
+      - git push
+      - git push --tags
+      - gh release create --generate-notes {{.CLI_ARGS}}
+      - gh release upload {{.CLI_ARGS}} ./dist/*
+
+  pytest:
     desc: "run Python tests"
     deps:
       - install:test
     cmds:
-      - .venvs/base/bin/flitenv test run pytest {{.CLI_ARGS}}
-  flake8_warnings:run:
-    desc: "run flake8_warnings"
-    deps:
-      - install:lint
-    cmds:
-      - .venvs/base/bin/flitenv lint run python3 -m flake8_warnings {{.CLI_ARGS}}
-  flake8:run:
+      - "{{.TEST_PYTHON}} -m pytest {{.CLI_ARGS}}"
+  flake8:
     desc: "lint Python code"
     deps:
       - install:lint
     cmds:
-      - .venvs/base/bin/flitenv lint run flake8 {{.CLI_ARGS}}
-  mypy:run:
+      - "{{.LINT_PYTHON}} -m flake8 {{.CLI_ARGS}} ."
+  mypy:
     desc: "check type annotations"
     deps:
       - install:lint
     cmds:
-      - .venvs/base/bin/flitenv lint run mypy {{.CLI_ARGS}}
-  isort:run:
+      - "{{.LINT_PYTHON}} -m mypy {{.CLI_ARGS}}"
+  unify:
+    desc: "convert double quotes to single ones"
+    deps:
+      - install:lint
+    cmds:
+      - "{{.LINT_PYTHON}} -m unify -r -i --quote=\\' {{.CLI_ARGS}} flake8_warnings tests"
+  isort:
     desc: "sort imports"
     deps:
       - install:lint
     cmds:
-      - .venvs/base/bin/flitenv lint run isort {{.CLI_ARGS}} .
+      - "{{.LINT_PYTHON}} -m isort {{.CLI_ARGS}} ."
   isort:check:
-    desc: "check if all imports are sorted"
+    desc: "sort imports"
     deps:
       - install:lint
     cmds:
-      - .venvs/base/bin/flitenv lint run isort {{.CLI_ARGS}} --check .
-  linters:run:
+      - "{{.LINT_PYTHON}} -m isort --check {{.CLI_ARGS}} ."
+
+  # groups
+  format:
+    desc: "run all code formatters"
+    cmds:
+      - task: isort
+      - task: unify
+  lint:
     desc: "run all linters"
     cmds:
-      - task: flake8:run
-      - task: mypy:run
+      - task: flake8
+      - task: mypy
       - task: isort:check
+  test:
+    desc: "run all tests"
+    cmds:
+      - task: pytest
+  all:
+    desc: "run all code formatters, linters, and tests"
+    cmds:
+      - task: format
+      - task: lint
+      - task: test

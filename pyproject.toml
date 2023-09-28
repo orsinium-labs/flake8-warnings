@@ -4,15 +4,13 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "flake8-warnings"
-authors = [
-    {name = "Gram", email = "gram@orsinium.dev"},
-]
-license = {file = "LICENSE"}
+authors = [{ name = "Gram", email = "gram@orsinium.dev" }]
+license = { file = "LICENSE" }
 readme = "README.md"
 requires-python = ">=3.6"
 dynamic = ["version", "description"]
 classifiers = [
-     "Development Status :: 5 - Production/Stable",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Plugins",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
@@ -21,20 +19,23 @@ classifiers = [
     "Topic :: Software Development :: Quality Assurance",
 ]
 keywords = [
+    "deprecation",
     "flake8",
     "pylint",
     "warnings",
     "linter",
     "flakehell",
 ]
-dependencies = ["astroid"]
+dependencies = ["astroid>=3.0.0"]
 
 [project.optional-dependencies]
 test = ["pytest"]
 lint = [
-    "flake8-length",
-    "mypy",
-    "isort",
+    "flake8",        # linter
+    "flake8-length", # allow long strings
+    "mypy",          # type checker
+    "isort",         # sort imports
+    "unify",         # use single quotes everywhere
 ]
 
 
