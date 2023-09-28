@@ -20,7 +20,7 @@ except ImportError:
 CODE = 'W99{:02}'
 
 
-def register(linter: "PyLinter") -> None:
+def register(linter: 'PyLinter') -> None:
     linter.register_checker(PyLintChecker(linter))
 
 

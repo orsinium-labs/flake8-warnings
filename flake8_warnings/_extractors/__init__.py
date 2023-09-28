@@ -7,7 +7,7 @@ from ._stdlib import StdlibExtractor
 from ._warnings import WarningsExtractor
 
 
-__all__ = ["CODES", "EXTRACTORS", "Extractor", "WarningInfo"]
+__all__ = ['CODES', 'EXTRACTORS', 'Extractor', 'WarningInfo']
 EXTRACTORS: Tuple[Type[Extractor], ...] = (
     DecoratorsExtractor,
     DocstringsExtractor,
