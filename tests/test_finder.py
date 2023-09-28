@@ -16,12 +16,7 @@ def e(node):
     return [(w.category, w.message) for w in WarningFinder(node).find()]
 
 
-ASTROID_WARNING = "The 'astroid.node_classes' module is deprecated and will be replaced by 'astroid.nodes' in astroid 3.0.0"  # noqa
-
-
 @pytest.mark.parametrize("given, etype, emsg", [
-    ("import astroid.node_classes", DeprecationWarning, ASTROID_WARNING),
-    ("from astroid.node_classes import *", DeprecationWarning, ASTROID_WARNING),
     ("import tests.samples.warnings_module", DeprecationWarning, "mod warn"),
     ("from tests.samples.warnings_module import fun", DeprecationWarning, "mod warn"),
     ("from tests.samples.warnings_function import func", DeprecationWarning, "func warn"),

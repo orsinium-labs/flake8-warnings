@@ -8,8 +8,7 @@ from ._base import NAMES, Extractor, WarningInfo
 BRANCHING = (
     astroid.If,
     astroid.With,
-    astroid.TryExcept,
-    astroid.TryFinally,
+    astroid.Try,
     astroid.Return,
     astroid.Raise,
 )
