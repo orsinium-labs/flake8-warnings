@@ -1,7 +1,7 @@
 import warnings
 
 
-warnings.warn("mod warn", DeprecationWarning)
+warnings.warn('mod warn', DeprecationWarning)
 
 
 def func():
@@ -9,4 +9,4 @@ def func():
 
 
 def not_imported_func():
-    warnings.warn("this one is ignored")
+    warnings.warn('this one is ignored')

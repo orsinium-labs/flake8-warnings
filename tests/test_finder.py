@@ -16,10 +16,10 @@ def e(node):
     return [(w.category, w.message) for w in WarningFinder(node).find()]
 
 
-@pytest.mark.parametrize("given, etype, emsg", [
-    ("import tests.samples.warnings_module", DeprecationWarning, "mod warn"),
-    ("from tests.samples.warnings_module import fun", DeprecationWarning, "mod warn"),
-    ("from tests.samples.warnings_function import func", DeprecationWarning, "func warn"),
+@pytest.mark.parametrize('given, etype, emsg', [
+    ('import tests.samples.warnings_module', DeprecationWarning, 'mod warn'),
+    ('from tests.samples.warnings_module import fun', DeprecationWarning, 'mod warn'),
+    ('from tests.samples.warnings_function import func', DeprecationWarning, 'func warn'),
 ])
 def test_finder__import(given, etype, emsg):
     r = e(p(given))
