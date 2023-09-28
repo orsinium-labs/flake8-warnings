@@ -5,5 +5,5 @@ from ._flake8_plugin import Flake8Checker
 from ._pylint_plugin import register
 
 
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 __all__ = ['Flake8Checker', 'register']
